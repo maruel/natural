@@ -1,8 +1,7 @@
 # natural
 
-Yet another natural sort, with 100% test coverage and a benchmark. It does no
-memory allocation, does not depends on package `sort` so it doesn't depends on
-`reflect`.
+Yet another natural sort, with 100% test coverage and a benchmark. It allocates
+no memory, doesn't depend on package `sort` and hence doesn't depend on `reflect`.
 
 [![GoDoc](https://godoc.org/github.com/maruel/natural?status.svg)](https://godoc.org/github.com/maruel/natural)
 
