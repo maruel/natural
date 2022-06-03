@@ -54,7 +54,11 @@ func TestLessNot(t *testing.T) {
 	}
 }
 
-func BenchmarkNative(b *testing.B) {
+// BenchmarkLessDigitsTwoGroupsNative benchmarks calling a function that just
+// does a < b without taking into account the digits, using the same string as
+// BenchmarkLessDigitsTwoGroups.
+func BenchmarkLessDigitsTwoGroupsNative(b *testing.B) {
+	b.ReportAllocs()
 	for i := 0; i < b.N; i++ {
 		if less("a01a2", "a01a01") {
 			b.Fatal("unexpected result")
@@ -67,7 +71,19 @@ func less(a, b string) bool {
 	return a < b
 }
 
+// BenchmarkLessDigitsTwoGroups compares "a01a2" and "a01a01".
+func BenchmarkLessDigitsTwoGroups(b *testing.B) {
+	b.ReportAllocs()
+	for i := 0; i < b.N; i++ {
+		if Less("a01a2", "a01a01") {
+			b.Fatal("unexpected result")
+		}
+	}
+}
+
+// BenchmarkLessStringOnly doesn't contain digits.
 func BenchmarkLessStringOnly(b *testing.B) {
+	b.ReportAllocs()
 	for i := 0; i < b.N; i++ {
 		if Less("abcd", "abc") {
 			b.Fatal("unexpected result")
@@ -75,7 +91,9 @@ func BenchmarkLessStringOnly(b *testing.B) {
 	}
 }
 
-func BenchmarkLessDigits(b *testing.B) {
+// BenchmarkLessDigitsOnly contains only digits.
+func BenchmarkLessDigitsOnly(b *testing.B) {
+	b.ReportAllocs()
 	for i := 0; i < b.N; i++ {
 		if Less("10", "2") {
 			b.Fatal("unexpected result")
@@ -83,17 +101,11 @@ func BenchmarkLessDigits(b *testing.B) {
 	}
 }
 
-func BenchmarkLessStringDigits(b *testing.B) {
+// BenchmarkLess10Blocks benchmark a mix of 10 strings and digits.
+func BenchmarkLess10Blocks(b *testing.B) {
+	b.ReportAllocs()
 	for i := 0; i < b.N; i++ {
-		if Less("a10", "a2") {
-			b.Fatal("unexpected result")
-		}
-	}
-}
-
-func BenchmarkLessDigitsTwoGroups(b *testing.B) {
-	for i := 0; i < b.N; i++ {
-		if Less("a01a2", "a01a01") {
+		if Less("a01a01a01a01a01a01a01a01a01a2", "a01a01a01a01a01a01a01a01a01a01") {
 			b.Fatal("unexpected result")
 		}
 	}

@@ -11,34 +11,33 @@ Reference](https://pkg.go.dev/badge/github.com/maruel/natural.svg)](https://pkg.
 
 ## Benchmarks
 
-On Go 1.10.1.
-
-On a Xeon:
+On Go 1.18.3.
 
 ```
-$ go test -bench=. -benchmem -cpu 1
+$ go test -bench=. -cpu 1
 goos: linux
 goarch: amd64
 pkg: github.com/maruel/natural
-BenchmarkNative                200000000       8.63 ns/op     0 B/op     0 allocs/op
-BenchmarkLessStringOnly        100000000       18.7 ns/op     0 B/op     0 allocs/op
-BenchmarkLessDigits             50000000       30.5 ns/op     0 B/op     0 allocs/op
-BenchmarkLessStringDigits       50000000       31.3 ns/op     0 B/op     0 allocs/op
-BenchmarkLessDigitsTwoGroups    20000000       64.4 ns/op     0 B/op     0 allocs/op
+cpu: Intel(R) Core(TM) i7-10700 CPU @ 2.90GHz
+BenchmarkLessDigitsTwoGroupsNative 329085624     3.628 ns/op   0 B/op   0 allocs/op
+BenchmarkLessDigitsTwoGroups        31792579    38.07 ns/op    0 B/op   0 allocs/op
+BenchmarkLessStringOnly            147547137     8.127 ns/op   0 B/op   0 allocs/op
+BenchmarkLessDigitsOnly             65866989    17.92 ns/op    0 B/op   0 allocs/op
+BenchmarkLess10Blocks                5997386   198.3 ns/op     0 B/op   0 allocs/op
 ```
 
 On a Raspberry Pi 3:
 
 ```
-$ go test -bench=. -benchmem -cpu 1
+$ go test -bench=. -cpu 1
 goos: linux
 goarch: arm
 pkg: github.com/maruel/natural
-BenchmarkNative                 10000000        148 ns/op     0 B/op      0 allocs/op
-BenchmarkLessStringOnly          5000000        312 ns/op     0 B/op      0 allocs/op
-BenchmarkLessDigits              2000000        656 ns/op     0 B/op      0 allocs/op
-BenchmarkLessStringDigits        2000000        679 ns/op     0 B/op      0 allocs/op
-BenchmarkLessDigitsTwoGroups     1000000       1480 ns/op     0 B/op      0 allocs/op
+BenchmarkLessDigitsTwoGroupsNative  13044535    85.86 ns/op    0 B/op   0 allocs/op
+BenchmarkLessDigitsTwoGroups         1576779   751.7 ns/op     0 B/op   0 allocs/op
+BenchmarkLessStringOnly              8470698   141.5 ns/op     0 B/op   0 allocs/op
+BenchmarkLessDigitsOnly              3674454   326.4 ns/op     0 B/op   0 allocs/op
+BenchmarkLess10Blocks                 314845  3821 ns/op       0 B/op   0 allocs/op
 ```
 
 Coverage:

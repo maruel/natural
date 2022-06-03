@@ -4,6 +4,10 @@
 
 // Package natural defines a natural "less" to compare two strings while
 // interpreting natural numbers.
+//
+// This is occasionally nicknamed 'natsort'.
+//
+// It does so with no memory allocation.
 package natural
 
 import (
@@ -12,9 +16,9 @@ import (
 
 // Less does a 'natural' comparison on the two strings.
 //
-// This is occasionally nicknamed 'natsort'.
+// It treats digits as decimal numbers, so that Less("10", "2") return true.
 //
-// It treats decimal numbers as value, so that Less("10", "2") return true.
+// This function does no memory allocation.
 func Less(a, b string) bool {
 	for {
 		if a == b {
