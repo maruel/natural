@@ -21,12 +21,12 @@ import (
 // This function does no memory allocation.
 func Less(a, b string) bool {
 	for {
-		if a == b {
-			return false
-		}
 		if p := commonPrefix(a, b); p != 0 {
 			a = a[p:]
 			b = b[p:]
+		}
+		if len(a) == 0 {
+			return len(b) != 0
 		}
 		if ia := digits(a); ia > 0 {
 			if ib := digits(b); ib > 0 {

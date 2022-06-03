@@ -19,11 +19,11 @@ goos: linux
 goarch: amd64
 pkg: github.com/maruel/natural
 cpu: Intel(R) Core(TM) i7-10700 CPU @ 2.90GHz
-BenchmarkLessDigitsTwoGroupsNative 329085624     3.628 ns/op   0 B/op   0 allocs/op
-BenchmarkLessDigitsTwoGroups        31792579    38.07 ns/op    0 B/op   0 allocs/op
-BenchmarkLessStringOnly            147547137     8.127 ns/op   0 B/op   0 allocs/op
-BenchmarkLessDigitsOnly             65866989    17.92 ns/op    0 B/op   0 allocs/op
-BenchmarkLess10Blocks                5997386   198.3 ns/op     0 B/op   0 allocs/op
+BenchmarkLessDigitsTwoGroupsNative 331287298     3.597 ns/op   0 B/op   0 allocs/op
+BenchmarkLessDigitsTwoGroups        32479050    36.55 ns/op    0 B/op   0 allocs/op
+BenchmarkLessStringOnly            157775884     7.603 ns/op   0 B/op   0 allocs/op
+BenchmarkLessDigitsOnly             69210796    17.52 ns/op    0 B/op   0 allocs/op
+BenchmarkLess10Blocks                6331066   190.8 ns/op     0 B/op   0 allocs/op
 ```
 
 On a Raspberry Pi 3:
@@ -33,11 +33,11 @@ $ go test -bench=. -cpu 1
 goos: linux
 goarch: arm
 pkg: github.com/maruel/natural
-BenchmarkLessDigitsTwoGroupsNative  13044535    85.86 ns/op    0 B/op   0 allocs/op
-BenchmarkLessDigitsTwoGroups         1576779   751.7 ns/op     0 B/op   0 allocs/op
-BenchmarkLessStringOnly              8470698   141.5 ns/op     0 B/op   0 allocs/op
-BenchmarkLessDigitsOnly              3674454   326.4 ns/op     0 B/op   0 allocs/op
-BenchmarkLess10Blocks                 314845  3821 ns/op       0 B/op   0 allocs/op
+BenchmarkLessDigitsTwoGroupsNative  14181789    86.57 ns/op    0 B/op   0 allocs/op
+BenchmarkLessDigitsTwoGroups         1600195   748.9 ns/op     0 B/op   0 allocs/op
+BenchmarkLessStringOnly              8286034   142.3 ns/op     0 B/op   0 allocs/op
+BenchmarkLessDigitsOnly              3653055   331.4 ns/op     0 B/op   0 allocs/op
+BenchmarkLess10Blocks                 310687  3838 ns/op       0 B/op   0 allocs/op
 ```
 
 Coverage:
@@ -48,4 +48,3 @@ PASS
 coverage: 100.0% of statements
 ok     github.com/maruel/natural       0.012s
 ```
-
