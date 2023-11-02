@@ -46,6 +46,7 @@ func TestLessNot(t *testing.T) {
 		{"a00b00", "a0b0"},
 		{"a00b01", "a0b00"},
 		{"a00b00", "a0b00"},
+		{"10", "2"},
 	}
 	for _, l := range data {
 		if Less(l[0], l[1]) {
