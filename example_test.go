@@ -6,6 +6,7 @@ package natural_test
 
 import (
 	"fmt"
+	"slices"
 	"sort"
 	"strings"
 
@@ -19,6 +20,8 @@ func Example() {
 		"gpio20",
 	}
 	sort.Sort(natural.StringSlice(items))
+	// or
+	slices.SortFunc(items, natural.Compare)
 	fmt.Println(strings.Join(items, "\n"))
 	// Output:
 	// gpio1
