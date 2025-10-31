@@ -13,14 +13,26 @@ import (
 	"github.com/maruel/natural"
 )
 
-func Example() {
+func Example_less() {
 	items := []string{
 		"gpio10",
 		"gpio1",
 		"gpio20",
 	}
 	sort.Sort(natural.StringSlice(items))
-	// or
+	fmt.Println(strings.Join(items, "\n"))
+	// Output:
+	// gpio1
+	// gpio10
+	// gpio20
+}
+
+func Example_compare() {
+	items := []string{
+		"gpio10",
+		"gpio1",
+		"gpio20",
+	}
 	slices.SortFunc(items, natural.Compare)
 	fmt.Println(strings.Join(items, "\n"))
 	// Output:
