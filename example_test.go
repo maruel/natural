@@ -13,7 +13,22 @@ import (
 	"github.com/maruel/natural"
 )
 
-func Example_less() {
+func Example() {
+	items := []string{
+		"gpio10",
+		"gpio1",
+		"gpio20",
+	}
+	slices.SortFunc(items, natural.Compare)
+	fmt.Println(strings.Join(items, "\n"))
+	// Output:
+	// gpio1
+	// gpio10
+	// gpio20
+}
+
+func ExampleLess() {
+	// The old way to sort before Go 1.23. It is recommended to use the new slices standard package with Compare.
 	items := []string{
 		"gpio10",
 		"gpio1",
@@ -27,7 +42,7 @@ func Example_less() {
 	// gpio20
 }
 
-func Example_compare() {
+func ExampleCompare() {
 	items := []string{
 		"gpio10",
 		"gpio1",

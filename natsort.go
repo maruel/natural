@@ -65,6 +65,8 @@ func Compare(a, b string) int {
 
 // StringSlice attaches the methods of Interface to []string, sorting in
 // increasing order using natural order.
+//
+// It is now obsolete, use slices.Sort() along with natsort.Compare instead.
 type StringSlice []string
 
 func (p StringSlice) Len() int           { return len(p) }
