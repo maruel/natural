@@ -12,6 +12,7 @@ package natural
 
 import (
 	"strconv"
+	"strings"
 )
 
 // Less does a 'natural' comparison on the two strings.
@@ -20,13 +21,22 @@ import (
 //
 // This function does no memory allocation.
 func Less(a, b string) bool {
+	return Compare(a, b) < 0
+}
+
+// Compare does a 'natural' comparison on the two strings.
+//
+// It treats digits as decimal numbers, so that Compare("10", "2") return >0.
+//
+// This function does no memory allocation.
+func Compare(a, b string) int {
 	for {
 		if p := commonPrefix(a, b); p != 0 {
 			a = a[p:]
 			b = b[p:]
 		}
 		if len(a) == 0 {
-			return len(b) != 0
+			return -len(b)
 		}
 		if ia := digits(a); ia > 0 {
 			if ib := digits(b); ib > 0 {
@@ -35,7 +45,7 @@ func Less(a, b string) bool {
 				bn, berr := strconv.ParseUint(b[:ib], 10, 64)
 				if aerr == nil && berr == nil {
 					if an != bn {
-						return an < bn
+						return int(an - bn)
 					}
 					// Semantically the same digits, e.g. "00" == "0", "01" == "1". In
 					// this case, only continue processing if there's trailing data on
@@ -48,7 +58,7 @@ func Less(a, b string) bool {
 				}
 			}
 		}
-		return a < b
+		return strings.Compare(a, b)
 	}
 }
 
