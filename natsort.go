@@ -45,6 +45,7 @@ func Compare(a, b string) int {
 				bn, berr := strconv.ParseUint(b[:ib], 10, 64)
 				if aerr == nil && berr == nil {
 					if an != bn {
+						// #nosec G40
 						return int(an - bn)
 					}
 					// Semantically the same digits, e.g. "00" == "0", "01" == "1". In
