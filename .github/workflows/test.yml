@@ -230,7 +230,7 @@ jobs:
       matrix:
         os: [ubuntu-latest]
         # Do not forget to bump every 6 months!
-        gover: ["1.21"]
+        gover: ["1.25"]
     permissions:
       security-events: write
     steps:
