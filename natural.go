@@ -46,8 +46,12 @@ func Compare(a, b string) int {
 				if aerr == nil && berr == nil {
 					// Fast path: both fit in uint64
 					if an != bn {
-						// #nosec G40
-						return int(an - bn)
+						// The difference may not fit in an int. uint64 max compared
+						// with 0 used to come back negative.
+						if an < bn {
+							return -1
+						}
+						return 1
 					}
 					// Semantically the same digits, e.g. "00" == "0", "01" == "1". In
 					// this case, only continue processing if there's trailing data on

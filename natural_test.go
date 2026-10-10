@@ -15,6 +15,8 @@ func TestCompareLess(t *testing.T) {
 		{"a", "b"},
 		{"a", "aa"},
 		{"a0", "a1"},
+		{"0", "18446744073709551615"},
+		{"0", "9223372036854775808"},
 		{"a0", "a00"},
 		{"a00", "a01"},
 		{"a01", "a1"},
@@ -50,6 +52,8 @@ func TestCompareGreater(t *testing.T) {
 		{"a00b00", "a0b0"},
 		{"a00b01", "a0b00"},
 		{"10", "2"},
+		{"18446744073709551615", "0"},
+		{"9223372036854775808", "0"},
 	}
 	for _, l := range data {
 		t.Run(fmt.Sprintf("%s-%s", l[0], l[1]), func(t *testing.T) {
