@@ -10,12 +10,73 @@ run:
 linters:
   default: none
   enable:
+    - asasalint
+    - asciicheck
+    - bidichk
+    - bodyclose
+    - canonicalheader
+    - contextcheck
+    - copyloopvar
+    - dupl
+    - dupword
+    - durationcheck
+    - embeddedstructfieldcheck
+    - errcheck
+    - errchkjson
+    - errname
+    - errorlint
+    - exhaustive
+    - exptostd
+    - fatcontext
+    - forcetypeassert
+    - funcorder
+    - gocheckcompilerdirectives
+    - gochecksumtype
+    - gocritic
+    - godoclint
+    - godot
+    - gomoddirectives
+    - goprintffuncname
     - gosec
+    - gosmopolitan
     - govet
+    - grouper
+    - iface
+    - importas
+    - inamedparam
     - ineffassign
-    - misspell
+    - intrange
+    - iotamixing
+    - loggercheck
+    - makezero
+    - mirror
+    - modernize
+    - musttag
+    - nakedret
+    - nilerr
+    - nilnesserr
+    - nilnil
+    - noctx
+    - nolintlint
+    - nosprintfhostport
+    - paralleltest
+    - perfsprint
+    - prealloc
+    - predeclared
+    - reassign
+    - recvcheck
+    - revive
+    - sloglint
+    - sqlclosecheck
     - staticcheck
+    - tparallel
+    - unconvert
+    - unparam
     - unused
+    - usestdlibvars
+    - usetesting
+    - wastedassign
+    - whitespace
   exclusions:
     rules:
       # The standalone gosec CI command scanned production sources only.

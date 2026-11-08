@@ -100,7 +100,7 @@ func commonPrefix(a, b string) int {
 	}
 	_ = a[m-1]
 	_ = b[m-1]
-	for i := 0; i < m; i++ {
+	for i := range m {
 		ca := a[i]
 		cb := b[i]
 		if (ca >= '0' && ca <= '9') || (cb >= '0' && cb <= '9') || ca != cb {
@@ -111,7 +111,7 @@ func commonPrefix(a, b string) int {
 }
 
 func digits(s string) int {
-	for i := 0; i < len(s); i++ {
+	for i := range len(s) {
 		c := s[i]
 		if c < '0' || c > '9' {
 			return i
@@ -141,7 +141,7 @@ func compareNumericStrings(a, b string) int {
 // Returns "0" if the string is all zeros.
 // This function does no memory allocation (only string slicing).
 func trimLeadingZeros(s string) string {
-	for i := 0; i < len(s); i++ {
+	for i := range len(s) {
 		if s[i] != '0' {
 			return s[i:]
 		}

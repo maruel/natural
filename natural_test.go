@@ -12,6 +12,7 @@ import (
 )
 
 func TestCompareLess(t *testing.T) {
+	t.Parallel()
 	data := [][2]string{
 		{"", "a"},
 		{"a", "b"},
@@ -34,6 +35,7 @@ func TestCompareLess(t *testing.T) {
 	}
 	for _, l := range data {
 		t.Run(fmt.Sprintf("%s-%s", l[0], l[1]), func(t *testing.T) {
+			t.Parallel()
 			if res := Compare(l[0], l[1]); res >= 0 {
 				t.Fatalf("Compare(%q, %q) returned >=0: %d", l[0], l[1], res)
 			}
@@ -42,6 +44,7 @@ func TestCompareLess(t *testing.T) {
 }
 
 func TestCompareGreater(t *testing.T) {
+	t.Parallel()
 	data := [][2]string{
 		{"a", ""},
 		{"aa", "a"},
@@ -55,6 +58,7 @@ func TestCompareGreater(t *testing.T) {
 	}
 	for _, l := range data {
 		t.Run(fmt.Sprintf("%s-%s", l[0], l[1]), func(t *testing.T) {
+			t.Parallel()
 			if res := Compare(l[0], l[1]); res <= 0 {
 				t.Fatalf("Compare(%q, %q) returned <=0: %d", l[0], l[1], res)
 			}
@@ -63,6 +67,7 @@ func TestCompareGreater(t *testing.T) {
 }
 
 func TestCompareEqual(t *testing.T) {
+	t.Parallel()
 	data := [][2]string{
 		{"a", "a"},
 		{"a01", "a01"},
@@ -75,6 +80,7 @@ func TestCompareEqual(t *testing.T) {
 	}
 	for _, l := range data {
 		t.Run(fmt.Sprintf("%s-%s", l[0], l[1]), func(t *testing.T) {
+			t.Parallel()
 			if res := Compare(l[0], l[1]); res != 0 {
 				t.Fatalf("Compare(%q, %q) returned !=0: %d", l[0], l[1], res)
 			}
@@ -83,8 +89,12 @@ func TestCompareEqual(t *testing.T) {
 }
 
 func TestCompareLargeNumbers(t *testing.T) {
+	t.Parallel()
 	// Additional tests specifically for numbers larger than uint64
-	data := [][3]interface{}{
+	data := []struct {
+		a, b     string
+		expected int
+	}{
 		// [a, b, expected_sign] where expected_sign: -1 (a<b), 0 (a==b), 1 (a>b)
 		{"a99999999999999999999", "a100000000000000000000", -1},
 		{"a123456789012345678901234567890", "a123456789012345678901234567891", -1},
@@ -98,10 +108,9 @@ func TestCompareLargeNumbers(t *testing.T) {
 		{"a00000000000000000000001x", "a1x", 0},
 	}
 	for _, l := range data {
-		a := l[0].(string)
-		b := l[1].(string)
-		expected := l[2].(int)
+		a, b, expected := l.a, l.b, l.expected
 		t.Run(fmt.Sprintf("%s-%s", a, b), func(t *testing.T) {
+			t.Parallel()
 			res := Compare(a, b)
 			if (expected < 0 && res >= 0) || (expected > 0 && res <= 0) || (expected == 0 && res != 0) {
 				t.Fatalf("Compare(%q, %q) returned %d, expected sign: %d", a, b, res, expected)
@@ -115,7 +124,7 @@ func TestCompareLargeNumbers(t *testing.T) {
 // BenchmarkLessDigitsTwoGroups.
 func BenchmarkLessDigitsTwoGroupsNative(b *testing.B) {
 	b.ReportAllocs()
-	for i := 0; i < b.N; i++ {
+	for range b.N {
 		if less("a01a2", "a01a01") {
 			b.Fatal("unexpected result")
 		}
@@ -130,7 +139,7 @@ func less(a, b string) bool {
 // BenchmarkLessDigitsTwoGroups compares "a01a2" and "a01a01".
 func BenchmarkLessDigitsTwoGroups(b *testing.B) {
 	b.ReportAllocs()
-	for i := 0; i < b.N; i++ {
+	for range b.N {
 		if Less("a01a2", "a01a01") {
 			b.Fatal("unexpected result")
 		}
@@ -140,7 +149,7 @@ func BenchmarkLessDigitsTwoGroups(b *testing.B) {
 // BenchmarkLessStringOnly doesn't contain digits.
 func BenchmarkLessStringOnly(b *testing.B) {
 	b.ReportAllocs()
-	for i := 0; i < b.N; i++ {
+	for range b.N {
 		if Less("abcd", "abc") {
 			b.Fatal("unexpected result")
 		}
@@ -150,7 +159,7 @@ func BenchmarkLessStringOnly(b *testing.B) {
 // BenchmarkLessDigitsOnly contains only digits.
 func BenchmarkLessDigitsOnly(b *testing.B) {
 	b.ReportAllocs()
-	for i := 0; i < b.N; i++ {
+	for range b.N {
 		if Less("10", "2") {
 			b.Fatal("unexpected result")
 		}
@@ -160,7 +169,7 @@ func BenchmarkLessDigitsOnly(b *testing.B) {
 // BenchmarkLess10Blocks benchmark a mix of 10 strings and digits.
 func BenchmarkLess10Blocks(b *testing.B) {
 	b.ReportAllocs()
-	for i := 0; i < b.N; i++ {
+	for range b.N {
 		if Less("a01a01a01a01a01a01a01a01a01a2", "a01a01a01a01a01a01a01a01a01a01") {
 			b.Fatal("unexpected result")
 		}
